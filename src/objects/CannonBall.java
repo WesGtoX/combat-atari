@@ -61,7 +61,8 @@ public class CannonBall {
             }
         }
 
-        if(nCollisions == 10) {
+        // set the amount of collisions
+        if(nCollisions == 3) {
             tank.destroyCannonBall();
         }
 

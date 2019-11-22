@@ -44,7 +44,126 @@ public class Game extends Canvas implements Runnable {
     }
     @Override
     public void run() {
+        long lastTime = System.nanoTime();
+        long timer = System.currentTimeMillis();
+        double delta = 0.0;
+        double amountOfTicks = 60.0;
+        double ns = 1000000000 / amountOfTicks;
+        int frames = 0;
+
+        while(running) {
+            long now = System.nanoTime();
+            delta += (now - lastTime) / ns;
+            lastTime = now;
+            while(delta >= 1) {
+                update();
+                delta--;
+            }
+
+            if(running) {
+                render();
+                frames++;
+            }
+
+            if(System.currentTimeMillis() - timer >= 1000) {
+                System.out.println("[FPS] " + frames);
+                frames = 0;
+                timer += 1000;
+            }
+        }
+        stop();
+    }
+
+    public void update() {
+
+        if(!greenTank.checkMapCollision(map)) { // if no collisions happened
+            greenTank.update();
+        }
+        if(!blueTank.checkMapCollision(map)) {
+            blueTank.update();
+        }
+
+        if(greenTank.checkCannonBallCollision(blueTank)) {
+            greenTank.destroyCannonBall();
+            blueTank.destroy();
+            greenTank.addScore();
+            int tankY = (HEIGHT / 2) - (Tank.DIMENSION / 2) + 30;
+            blueTank.respawn(60, tankY, 90);
+        }
+        if(blueTank.checkCannonBallCollision(greenTank)) {
+            blueTank.destroyCannonBall();
+            greenTank.destroy();
+            blueTank.addScore();
+            int tankY = (HEIGHT / 2) - (Tank.DIMENSION / 2) + 30;
+            greenTank.respawn(WIDTH - 60 - Tank.DIMENSION, tankY, -90);
+        }
 
     }
 
+    public void render() {
+        BufferStrategy bs = this.getBufferStrategy();
+        if(bs == null) {
+            createBufferStrategy(3);
+            return;
+        }
+
+        Graphics g = bs.getDrawGraphics();
+
+        g.setColor(Color.PINK);
+        g.fillRect(0, 0, WIDTH, HEIGHT);
+
+        greenTank.render(g);
+        blueTank.render(g);
+
+        // draw scores
+        g.setColor(Color.BLUE);
+        g.setFont(new Font("Veradana", Font.PLAIN, 50));
+        g.drawString(blueTank.getScoreString(), 30, 50);
+        g.setColor(Color.GREEN);
+        g.drawString(greenTank.getScoreString(), WIDTH - 60, 50);
+
+        g.setColor(Color.YELLOW);
+
+        map.render(g);
+
+        g.dispose();
+        bs.show();
+    }
+
+    public synchronized void start() {
+        running = true;
+        thread = new Thread(this);
+        thread.start();
+    }
+
+    public synchronized  void stop() {
+        running = false;
+        try {
+            thread.join();
+        } catch(InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void keyPressed(int key) {
+        blueTank.keyPressed(key);
+        greenTank.keyPressed(key);
+    }
+
+    public void keyReleased(int key) {
+        blueTank.keyReleased(key);
+        greenTank.keyReleased(key);
+    }
+
+    public void sleep(int ms) {
+        try {
+            Thread.sleep(ms);
+        } catch(InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static void main(String[] args) {
+        new Game().start();
+    }
 }
