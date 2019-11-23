@@ -39,7 +39,7 @@ public class Game extends Canvas implements Runnable {
         int tankY = (HEIGHT / 2) - (Tank.DIMENSION / 2) + 30;
 
         map = new Map(this);
-        blueTank = new Tank(60, tankY, Color.BLUE, map,this);
+        blueTank = new Tank(60, tankY, Color.BLUE, map, this);
         greenTank = new Tank(WIDTH - 60 - Tank.DIMENSION, tankY, Color.GREEN, map,this);
     }
     @Override
@@ -76,7 +76,8 @@ public class Game extends Canvas implements Runnable {
 
     public void update() {
 
-        if(!greenTank.checkMapCollision(map)) { // if no collisions happened
+        if(!greenTank.checkMapCollision(map)) {
+            // if no collisions happened
             greenTank.update();
         }
         if(!blueTank.checkMapCollision(map)) {
@@ -109,17 +110,17 @@ public class Game extends Canvas implements Runnable {
 
         Graphics g = bs.getDrawGraphics();
 
-        g.setColor(Color.PINK);
+        g.setColor(Color.LIGHT_GRAY);
         g.fillRect(0, 0, WIDTH, HEIGHT);
 
         greenTank.render(g);
         blueTank.render(g);
 
         // draw scores
-        g.setColor(Color.BLUE);
+        g.setColor(Color.BLACK);
         g.setFont(new Font("Veradana", Font.PLAIN, 50));
         g.drawString(blueTank.getScoreString(), 30, 50);
-        g.setColor(Color.GREEN);
+        g.setColor(Color.BLACK);
         g.drawString(greenTank.getScoreString(), WIDTH - 60, 50);
 
         g.setColor(Color.YELLOW);
