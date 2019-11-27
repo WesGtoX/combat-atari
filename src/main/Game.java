@@ -42,6 +42,7 @@ public class Game extends Canvas implements Runnable {
         blueTank = new Tank(60, tankY, Color.BLUE, map, this);
         greenTank = new Tank(WIDTH - 60 - Tank.DIMENSION, tankY, Color.GREEN, map,this);
     }
+    
     @Override
     public void run() {
         long lastTime = System.nanoTime();
@@ -59,12 +60,10 @@ public class Game extends Canvas implements Runnable {
                 update();
                 delta--;
             }
-
             if(running) {
                 render();
                 frames++;
             }
-
             if(System.currentTimeMillis() - timer >= 1000) {
                 System.out.println("[FPS] " + frames);
                 frames = 0;
@@ -75,7 +74,6 @@ public class Game extends Canvas implements Runnable {
     }
 
     public void update() {
-
         if(!greenTank.checkMapCollision(map)) {
             // if no collisions happened
             greenTank.update();
@@ -83,7 +81,6 @@ public class Game extends Canvas implements Runnable {
         if(!blueTank.checkMapCollision(map)) {
             blueTank.update();
         }
-
         if(greenTank.checkCannonBallCollision(blueTank)) {
             greenTank.destroyCannonBall();
             blueTank.destroy();
@@ -98,7 +95,6 @@ public class Game extends Canvas implements Runnable {
             int tankY = (HEIGHT / 2) - (Tank.DIMENSION / 2) + 30;
             greenTank.respawn(WIDTH - 60 - Tank.DIMENSION, tankY, -90);
         }
-
     }
 
     public void render() {
@@ -107,7 +103,6 @@ public class Game extends Canvas implements Runnable {
             createBufferStrategy(3);
             return;
         }
-
         Graphics g = bs.getDrawGraphics();
 
         g.setColor(Color.LIGHT_GRAY);

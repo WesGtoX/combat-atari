@@ -7,12 +7,12 @@ import java.awt.Toolkit;
  *
  * @author Wesley
  */
-public class About extends javax.swing.JFrame {
+public class MenuAbout extends javax.swing.JFrame {
 
     /**
      * Creates new form Menu
      */
-    public About() {
+    public MenuAbout() {
         initComponents();
     }
 
@@ -38,9 +38,9 @@ public class About extends javax.swing.JFrame {
         lblDevOne.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         lblDevOne.setForeground(new java.awt.Color(255, 255, 255));
         lblDevOne.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblDevOne.setText("Lenin Boccardo, 00000");
+        lblDevOne.setText("Lenin Boccardo de Andrade, 827969");
         getContentPane().add(lblDevOne);
-        lblDevOne.setBounds(350, 380, 610, 40);
+        lblDevOne.setBounds(340, 380, 630, 40);
 
         lblDevTwo.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         lblDevTwo.setForeground(new java.awt.Color(255, 255, 255));
@@ -53,13 +53,16 @@ public class About extends javax.swing.JFrame {
         btnMenu.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         btnMenu.setForeground(new java.awt.Color(255, 255, 255));
         btnMenu.setText("MENU");
+        btnMenu.setMaximumSize(new java.awt.Dimension(200, 50));
+        btnMenu.setMinimumSize(new java.awt.Dimension(200, 50));
+        btnMenu.setPreferredSize(new java.awt.Dimension(200, 50));
         btnMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMenuActionPerformed(evt);
             }
         });
         getContentPane().add(btnMenu);
-        btnMenu.setBounds(540, 480, 200, 50);
+        btnMenu.setBounds(540, 530, 200, 50);
 
         lblBackgroundMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/combat_menu.jpg"))); // NOI18N
         getContentPane().add(lblBackgroundMenu);
@@ -99,21 +102,23 @@ public class About extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(About.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuAbout.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(About.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuAbout.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(About.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuAbout.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(About.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuAbout.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new About().setVisible(true);
+                new MenuAbout().setVisible(true);
             }
         });
     }

@@ -59,7 +59,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnAbout);
-        btnAbout.setBounds(540, 410, 200, 50);
+        btnAbout.setBounds(540, 420, 200, 50);
 
         btnExit.setBackground(new java.awt.Color(0, 87, 184));
         btnExit.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
@@ -71,7 +71,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnExit);
-        btnExit.setBounds(540, 480, 200, 50);
+        btnExit.setBounds(540, 500, 200, 50);
 
         lblBackgroundMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/combat_menu.jpg"))); // NOI18N
         getContentPane().add(lblBackgroundMenu);
@@ -89,12 +89,14 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
-        new Game().start();
+        MenuTank tank = new MenuTank();
+        tank.setVisible(true);
+//        new Game().start();
         this.dispose();
     }//GEN-LAST:event_btnStartActionPerformed
 
     private void btnAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAboutActionPerformed
-        About about = new About();
+        MenuAbout about = new MenuAbout();
         about.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnAboutActionPerformed
