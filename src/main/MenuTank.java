@@ -2,6 +2,8 @@ package main;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -9,14 +11,15 @@ import java.awt.Toolkit;
  */
 public class MenuTank extends javax.swing.JFrame {
 
-    public String player1;
-    public String player2;
+    public int player1;
+    public int player2;
     
     /**
      * Creates new form Menu
      */
     public MenuTank() {
         initComponents();
+        configForm();
     }
 
     @SuppressWarnings("unchecked")
@@ -32,7 +35,9 @@ public class MenuTank extends javax.swing.JFrame {
         lblTank4 = new javax.swing.JLabel();
         rdbTank4 = new javax.swing.JRadioButton();
         btnPlayer1 = new javax.swing.JButton();
+        txtTankPlayer1 = new javax.swing.JTextField();
         btnPlayer2 = new javax.swing.JButton();
+        txtTankPlayer2 = new javax.swing.JTextField();
         btnMenu = new javax.swing.JButton();
         btnpPlay = new javax.swing.JButton();
         lblBackgroundMenu = new javax.swing.JLabel();
@@ -115,7 +120,7 @@ public class MenuTank extends javax.swing.JFrame {
         getContentPane().add(rdbTank4);
         rdbTank4.setBounds(920, 290, 140, 25);
 
-        btnPlayer1.setBackground(new java.awt.Color(0, 87, 184));
+        btnPlayer1.setBackground(new java.awt.Color(51, 204, 255));
         btnPlayer1.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         btnPlayer1.setForeground(new java.awt.Color(255, 255, 255));
         btnPlayer1.setText("PLAYER 1");
@@ -128,9 +133,17 @@ public class MenuTank extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnPlayer1);
-        btnPlayer1.setBounds(370, 360, 210, 50);
+        btnPlayer1.setBounds(290, 360, 210, 50);
 
-        btnPlayer2.setBackground(new java.awt.Color(0, 87, 184));
+        txtTankPlayer1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtTankPlayer1.setForeground(new java.awt.Color(255, 0, 0));
+        txtTankPlayer1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtTankPlayer1.setMinimumSize(new java.awt.Dimension(100, 30));
+        txtTankPlayer1.setPreferredSize(new java.awt.Dimension(100, 30));
+        getContentPane().add(txtTankPlayer1);
+        txtTankPlayer1.setBounds(350, 420, 100, 30);
+
+        btnPlayer2.setBackground(new java.awt.Color(51, 204, 255));
         btnPlayer2.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         btnPlayer2.setForeground(new java.awt.Color(255, 255, 255));
         btnPlayer2.setText("PLAYER 2");
@@ -143,7 +156,15 @@ public class MenuTank extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnPlayer2);
-        btnPlayer2.setBounds(690, 360, 210, 50);
+        btnPlayer2.setBounds(780, 360, 210, 50);
+
+        txtTankPlayer2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        txtTankPlayer2.setForeground(new java.awt.Color(255, 0, 0));
+        txtTankPlayer2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtTankPlayer2.setMinimumSize(new java.awt.Dimension(100, 30));
+        txtTankPlayer2.setPreferredSize(new java.awt.Dimension(100, 30));
+        getContentPane().add(txtTankPlayer2);
+        txtTankPlayer2.setBounds(840, 420, 100, 30);
 
         btnMenu.setBackground(new java.awt.Color(0, 87, 184));
         btnMenu.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
@@ -191,11 +212,47 @@ public class MenuTank extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void btnPlayer1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayer1ActionPerformed
-        // TODO add your handling code here:
+        player1 = 0;
+        
+        if (rdbTank1.isSelected()) {
+            player1 = 1;
+            txtTankPlayer1.setText("Tank Green");
+            rdbTank1.disable();
+        } else if (rdbTank2.isSelected()) {
+            player1 = 2;
+            txtTankPlayer1.setText("Tank Red");
+            rdbTank2.disable();
+        } else if (rdbTank3.isSelected()) {
+            player1 = 3;
+            txtTankPlayer1.setText("Tank Yellow");
+            rdbTank3.disable();
+        } else if (rdbTank4.isSelected()) {
+            player1 = 4;
+            txtTankPlayer1.setText("Tank Blue");
+            rdbTank4.disable();
+        }
     }//GEN-LAST:event_btnPlayer1ActionPerformed
 
     private void btnPlayer2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayer2ActionPerformed
-        // TODO add your handling code here:
+        player2 = 0;
+        
+        if (rdbTank1.isSelected()) {
+            player2 = 1;
+            rdbTank1.disable();
+            txtTankPlayer2.setText("Tank Green");
+        } else if (rdbTank2.isSelected()) {
+            player2 = 2;
+            rdbTank2.disable();
+            txtTankPlayer2.setText("Tank Red");
+        } else if (rdbTank3.isSelected()) {
+            player2 = 3;
+            rdbTank3.disable();
+            txtTankPlayer2.setText("Tank Yellow");
+        } else if (rdbTank4.isSelected()) {
+            player2 = 4;
+            rdbTank4.disable();
+            txtTankPlayer2.setText("Tank Blue");
+        }
     }//GEN-LAST:event_btnPlayer2ActionPerformed
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
@@ -205,9 +262,19 @@ public class MenuTank extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMenuActionPerformed
 
     private void btnpPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpPlayActionPerformed
-        MenuMap map = new MenuMap();
-        map.setVisible(true);
-        this.dispose();
+        if (player1 != 0 && player2 != 0) {
+            MenuMap map = new MenuMap(player1, player2);
+            map.setVisible(true);
+            this.dispose();
+        } else if(player1 == 0) {
+            JOptionPane.showMessageDialog(
+                    null, "WARNING", "Selecione um TANK para o Player 1!", 
+                    JOptionPane.WARNING_MESSAGE);
+        } else if(player2 == 0) {
+            JOptionPane.showMessageDialog(
+                    null, "WARNING", "Selecione um TANK para o Player 2!", 
+                    JOptionPane.WARNING_MESSAGE);            
+        }
     }//GEN-LAST:event_btnpPlayActionPerformed
 
     /**
@@ -262,5 +329,16 @@ public class MenuTank extends javax.swing.JFrame {
     private javax.swing.JRadioButton rdbTank2;
     private javax.swing.JRadioButton rdbTank3;
     private javax.swing.JRadioButton rdbTank4;
+    private javax.swing.JTextField txtTankPlayer1;
+    private javax.swing.JTextField txtTankPlayer2;
     // End of variables declaration//GEN-END:variables
+
+    private void configForm(){
+        ButtonGroup bg = new ButtonGroup();
+        bg.add(rdbTank1);
+        bg.add(rdbTank2);
+        bg.add(rdbTank3);
+        bg.add(rdbTank4);
+        rdbTank1.setSelected(true);
+    }
 }

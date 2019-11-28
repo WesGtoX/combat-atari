@@ -2,32 +2,49 @@ package main;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import javax.swing.ButtonGroup;
 
 /**
  *
  * @author Wesley
  */
 public class MenuMap extends javax.swing.JFrame {
+    
+    public int player1;
+    public int player2;
+    public int map;
 
     /**
      * Creates new form Menu
      */
     public MenuMap() {
         initComponents();
+        configForm();
     }
 
+    public MenuMap(int player1, int player2) {
+        initComponents();
+        configForm();
+        this.player1 = player1;
+        this.player2 = player2;
+        System.out.println(this.player1);
+        System.out.println(this.player2);
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnpPlay = new javax.swing.JButton();
-        btnMenu = new javax.swing.JButton();
+        txtMap = new javax.swing.JTextField();
         rdbMap1 = new javax.swing.JRadioButton();
         rdbMap2 = new javax.swing.JRadioButton();
         rdbMap3 = new javax.swing.JRadioButton();
         jlbMap1 = new javax.swing.JLabel();
         jlbMap2 = new javax.swing.JLabel();
         jlbMap3 = new javax.swing.JLabel();
+        btnpMapSelect = new javax.swing.JButton();
+        btnpPlay = new javax.swing.JButton();
+        btnMenu = new javax.swing.JButton();
         lblBackgroundMenu = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -39,6 +56,87 @@ public class MenuMap extends javax.swing.JFrame {
             }
         });
         getContentPane().setLayout(null);
+
+        txtMap.setFont(new java.awt.Font("Arial", 1, 55)); // NOI18N
+        txtMap.setForeground(new java.awt.Color(255, 0, 0));
+        txtMap.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtMap.setMaximumSize(new java.awt.Dimension(450, 80));
+        txtMap.setMinimumSize(new java.awt.Dimension(450, 80));
+        txtMap.setPreferredSize(new java.awt.Dimension(450, 80));
+        getContentPane().add(txtMap);
+        txtMap.setBounds(420, 30, 450, 80);
+
+        rdbMap1.setBackground(new java.awt.Color(0, 102, 0));
+        rdbMap1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        rdbMap1.setForeground(new java.awt.Color(255, 255, 255));
+        rdbMap1.setText("De Dust");
+        rdbMap1.setContentAreaFilled(false);
+        rdbMap1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rdbMap1.setMaximumSize(new java.awt.Dimension(110, 25));
+        rdbMap1.setMinimumSize(new java.awt.Dimension(110, 25));
+        rdbMap1.setPreferredSize(new java.awt.Dimension(110, 25));
+        getContentPane().add(rdbMap1);
+        rdbMap1.setBounds(160, 330, 140, 25);
+
+        rdbMap2.setBackground(new java.awt.Color(255, 0, 0));
+        rdbMap2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        rdbMap2.setForeground(new java.awt.Color(255, 255, 255));
+        rdbMap2.setText("De Train");
+        rdbMap2.setContentAreaFilled(false);
+        rdbMap2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rdbMap2.setMaximumSize(new java.awt.Dimension(110, 25));
+        rdbMap2.setMinimumSize(new java.awt.Dimension(110, 25));
+        rdbMap2.setPreferredSize(new java.awt.Dimension(110, 25));
+        getContentPane().add(rdbMap2);
+        rdbMap2.setBounds(570, 330, 140, 25);
+
+        rdbMap3.setBackground(new java.awt.Color(255, 255, 0));
+        rdbMap3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        rdbMap3.setForeground(new java.awt.Color(255, 255, 255));
+        rdbMap3.setText("Fy Pool Day");
+        rdbMap3.setContentAreaFilled(false);
+        rdbMap3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rdbMap3.setMaximumSize(new java.awt.Dimension(110, 25));
+        rdbMap3.setMinimumSize(new java.awt.Dimension(110, 25));
+        rdbMap3.setPreferredSize(new java.awt.Dimension(110, 25));
+        getContentPane().add(rdbMap3);
+        rdbMap3.setBounds(980, 330, 140, 25);
+
+        jlbMap1.setForeground(new java.awt.Color(255, 255, 255));
+        jlbMap1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlbMap1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/map1.JPG"))); // NOI18N
+        jlbMap1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(jlbMap1);
+        jlbMap1.setBounds(60, 140, 350, 180);
+
+        jlbMap2.setForeground(new java.awt.Color(255, 255, 255));
+        jlbMap2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlbMap2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/map2.JPG"))); // NOI18N
+        jlbMap2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(jlbMap2);
+        jlbMap2.setBounds(470, 140, 350, 180);
+
+        jlbMap3.setForeground(new java.awt.Color(255, 255, 255));
+        jlbMap3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlbMap3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/map3.JPG"))); // NOI18N
+        jlbMap3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(jlbMap3);
+        jlbMap3.setBounds(870, 140, 350, 180);
+
+        btnpMapSelect.setBackground(new java.awt.Color(51, 204, 255));
+        btnpMapSelect.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        btnpMapSelect.setForeground(new java.awt.Color(255, 255, 255));
+        btnpMapSelect.setText("SELECT");
+        btnpMapSelect.setMaximumSize(new java.awt.Dimension(200, 50));
+        btnpMapSelect.setMinimumSize(new java.awt.Dimension(200, 50));
+        btnpMapSelect.setPreferredSize(new java.awt.Dimension(200, 50));
+        btnpMapSelect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnpMapSelectActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnpMapSelect);
+        btnpMapSelect.setBounds(540, 380, 200, 50);
 
         btnpPlay.setBackground(new java.awt.Color(0, 87, 184));
         btnpPlay.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
@@ -53,7 +151,7 @@ public class MenuMap extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnpPlay);
-        btnpPlay.setBounds(540, 450, 200, 50);
+        btnpPlay.setBounds(540, 470, 200, 50);
 
         btnMenu.setBackground(new java.awt.Color(0, 87, 184));
         btnMenu.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
@@ -68,64 +166,7 @@ public class MenuMap extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnMenu);
-        btnMenu.setBounds(540, 530, 200, 50);
-
-        rdbMap1.setBackground(new java.awt.Color(0, 102, 0));
-        rdbMap1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        rdbMap1.setForeground(new java.awt.Color(255, 255, 255));
-        rdbMap1.setText("Map 1");
-        rdbMap1.setContentAreaFilled(false);
-        rdbMap1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        rdbMap1.setMaximumSize(new java.awt.Dimension(110, 25));
-        rdbMap1.setMinimumSize(new java.awt.Dimension(110, 25));
-        rdbMap1.setPreferredSize(new java.awt.Dimension(110, 25));
-        getContentPane().add(rdbMap1);
-        rdbMap1.setBounds(160, 360, 140, 25);
-
-        rdbMap2.setBackground(new java.awt.Color(255, 0, 0));
-        rdbMap2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        rdbMap2.setForeground(new java.awt.Color(255, 255, 255));
-        rdbMap2.setText("Map 2");
-        rdbMap2.setContentAreaFilled(false);
-        rdbMap2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        rdbMap2.setMaximumSize(new java.awt.Dimension(110, 25));
-        rdbMap2.setMinimumSize(new java.awt.Dimension(110, 25));
-        rdbMap2.setPreferredSize(new java.awt.Dimension(110, 25));
-        getContentPane().add(rdbMap2);
-        rdbMap2.setBounds(570, 360, 140, 25);
-
-        rdbMap3.setBackground(new java.awt.Color(255, 255, 0));
-        rdbMap3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        rdbMap3.setForeground(new java.awt.Color(255, 255, 255));
-        rdbMap3.setText("Map 3");
-        rdbMap3.setContentAreaFilled(false);
-        rdbMap3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        rdbMap3.setMaximumSize(new java.awt.Dimension(110, 25));
-        rdbMap3.setMinimumSize(new java.awt.Dimension(110, 25));
-        rdbMap3.setPreferredSize(new java.awt.Dimension(110, 25));
-        getContentPane().add(rdbMap3);
-        rdbMap3.setBounds(980, 360, 140, 25);
-
-        jlbMap1.setForeground(new java.awt.Color(255, 255, 255));
-        jlbMap1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlbMap1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/map1.JPG"))); // NOI18N
-        jlbMap1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(jlbMap1);
-        jlbMap1.setBounds(60, 170, 350, 180);
-
-        jlbMap2.setForeground(new java.awt.Color(255, 255, 255));
-        jlbMap2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlbMap2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/map2.JPG"))); // NOI18N
-        jlbMap2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(jlbMap2);
-        jlbMap2.setBounds(470, 170, 350, 180);
-
-        jlbMap3.setForeground(new java.awt.Color(255, 255, 255));
-        jlbMap3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jlbMap3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/map3.JPG"))); // NOI18N
-        jlbMap3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(jlbMap3);
-        jlbMap3.setBounds(870, 170, 350, 180);
+        btnMenu.setBounds(540, 540, 200, 50);
 
         lblBackgroundMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/combat_map.jpg"))); // NOI18N
         getContentPane().add(lblBackgroundMenu);
@@ -142,16 +183,30 @@ public class MenuMap extends javax.swing.JFrame {
         );
     }//GEN-LAST:event_formWindowOpened
 
+    private void btnpMapSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpMapSelectActionPerformed
+        map = 0;
+        
+        if (rdbMap1.isSelected()) {
+            map = 1;
+            txtMap.setText("De Dust");
+        } else if (rdbMap2.isSelected()) {
+            map = 2;
+            txtMap.setText("De Train");
+        } else if (rdbMap3.isSelected()) {
+            map = 3;
+            txtMap.setText("Fy Pool Day");
+        }
+    }//GEN-LAST:event_btnpMapSelectActionPerformed
+
+    private void btnpPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpPlayActionPerformed
+        new Game().start();
+    }//GEN-LAST:event_btnpPlayActionPerformed
+
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
         Menu menu = new Menu();
         menu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnMenuActionPerformed
-
-    private void btnpPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpPlayActionPerformed
-        new Game().start();
-        this.dispose();
-    }//GEN-LAST:event_btnpPlayActionPerformed
 
     /**
      * @param args the command line arguments
@@ -197,6 +252,7 @@ public class MenuMap extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnMenu;
+    private javax.swing.JButton btnpMapSelect;
     private javax.swing.JButton btnpPlay;
     private javax.swing.JLabel jlbMap1;
     private javax.swing.JLabel jlbMap2;
@@ -205,5 +261,14 @@ public class MenuMap extends javax.swing.JFrame {
     private javax.swing.JRadioButton rdbMap1;
     private javax.swing.JRadioButton rdbMap2;
     private javax.swing.JRadioButton rdbMap3;
+    private javax.swing.JTextField txtMap;
     // End of variables declaration//GEN-END:variables
+    
+    private void configForm(){
+        ButtonGroup bg = new ButtonGroup();
+        bg.add(rdbMap1);
+        bg.add(rdbMap2);
+        bg.add(rdbMap3);
+        rdbMap1.setSelected(true);
+    }
 }
