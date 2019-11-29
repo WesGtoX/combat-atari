@@ -7,12 +7,12 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Wesley
+ * @author Wesley, Lenin
  */
 public class MenuTank extends javax.swing.JFrame {
 
-    public int player1;
-    public int player2;
+    public int player1 = 0;
+    public int player2 = 0;
     
     /**
      * Creates new form Menu
@@ -212,45 +212,41 @@ public class MenuTank extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void btnPlayer1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayer1ActionPerformed
-        player1 = 0;
-        
         if (rdbTank1.isSelected()) {
-            player1 = 1;
+            this.player1 = 1;
             txtTankPlayer1.setText("Tank Green");
-            rdbTank1.disable();
+//            rdbTank1.disable();
         } else if (rdbTank2.isSelected()) {
-            player1 = 2;
+            this.player1 = 2;
             txtTankPlayer1.setText("Tank Red");
-            rdbTank2.disable();
+//            rdbTank2.disable();
         } else if (rdbTank3.isSelected()) {
-            player1 = 3;
+            this.player1 = 3;
             txtTankPlayer1.setText("Tank Yellow");
-            rdbTank3.disable();
+//            rdbTank3.disable();
         } else if (rdbTank4.isSelected()) {
-            player1 = 4;
+            this.player1 = 4;
             txtTankPlayer1.setText("Tank Blue");
-            rdbTank4.disable();
+//            rdbTank4.disable();
         }
     }//GEN-LAST:event_btnPlayer1ActionPerformed
 
     private void btnPlayer2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayer2ActionPerformed
-        player2 = 0;
-        
         if (rdbTank1.isSelected()) {
-            player2 = 1;
-            rdbTank1.disable();
+            this.player2 = 1;
+//            rdbTank1.disable();
             txtTankPlayer2.setText("Tank Green");
         } else if (rdbTank2.isSelected()) {
-            player2 = 2;
-            rdbTank2.disable();
+            this.player2 = 2;
+//            rdbTank2.disable();
             txtTankPlayer2.setText("Tank Red");
         } else if (rdbTank3.isSelected()) {
-            player2 = 3;
-            rdbTank3.disable();
+            this.player2 = 3;
+//            rdbTank3.disable();
             txtTankPlayer2.setText("Tank Yellow");
         } else if (rdbTank4.isSelected()) {
-            player2 = 4;
-            rdbTank4.disable();
+            this.player2 = 4;
+//            rdbTank4.disable();
             txtTankPlayer2.setText("Tank Blue");
         }
     }//GEN-LAST:event_btnPlayer2ActionPerformed

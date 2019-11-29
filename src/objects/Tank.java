@@ -17,7 +17,7 @@ import utils.ResourceLoader;
 
 /**
  *
- * @author Wesley
+ * @author Wesley, Lenin
  */
 public class Tank {
     
@@ -36,7 +36,7 @@ public class Tank {
     private int cwKey;
     private int ccKey;
     private int fireKey;
-    private int score;
+    public int score;
 
     // moves and rotation variable
     private boolean movingUp;
@@ -44,6 +44,10 @@ public class Tank {
     private boolean rotatingCw;
     private boolean rotatingCc;
     private boolean destroyed;
+    
+    // tank
+    public int player1;
+    public int player2;
 
     // setting tank sprite
     private BufferedImage tankSprite;
@@ -57,12 +61,15 @@ public class Tank {
     
     private Color tankColor;
 
-    public Tank(int x, int y, Color tankColor, Map map, Game game) {
+    public Tank(int x, int y, Color tankColor, Map map, int as, int p1, int p2, Game game) {
         this.x = x;
         this.y = y;
         this.game = game;
         this.map = map;
+        
         this.tankColor = tankColor;
+        this.player1 = p1;
+        this.player2 = p2;
         
         // set move and rotation to false
         movingUp = false;
@@ -75,23 +82,41 @@ public class Tank {
         score = 0;
         
         // setting selected tank to play
-        if(tankColor == Color.BLUE) {
-            tankSprite = ResourceLoader.loadImage("images\\hulls_tank01.png");
+        if (this.player1 == 1) {
+            if(tankColor == Color.GREEN) {
+                tankSprite = ResourceLoader.loadImage("images\\hulls_tank01.png");
+            } else if(tankColor == Color.RED) {
+                tankSprite = ResourceLoader.loadImage("images\\hulls_tank02.png");
+            } else if(tankColor == Color.YELLOW) {
+                tankSprite = ResourceLoader.loadImage("images\\hulls_tank03.png");
+            } else if(tankColor == Color.BLUE) {
+                tankSprite = ResourceLoader.loadImage("images\\hulls_tank04.png");
+            }
             upKey = VK_W;
             downKey = VK_S;
             cwKey = VK_D;
             ccKey = VK_A;
             fireKey = VK_SPACE;
-            angle = 90;
-        } else if(tankColor == Color.GREEN) {
-            tankSprite = ResourceLoader.loadImage("images\\hulls_tank02.png");
+            angle = as;         // player1 = 90
+        }
+        
+        if (this.player2 == 2) {
+            if(tankColor == Color.GREEN) {
+                tankSprite = ResourceLoader.loadImage("images\\hulls_tank01.png");
+            } else if(tankColor == Color.RED) {
+                tankSprite = ResourceLoader.loadImage("images\\hulls_tank02.png");
+            } else if(tankColor == Color.YELLOW) {
+                tankSprite = ResourceLoader.loadImage("images\\hulls_tank03.png");
+            } else if(tankColor == Color.BLUE) {
+                tankSprite = ResourceLoader.loadImage("images\\hulls_tank04.png");
+            }
             upKey = VK_UP;
             downKey = VK_DOWN;
             cwKey = VK_RIGHT;
             ccKey = VK_LEFT;
             fireKey = VK_ENTER;
-            angle = -90;
-        } else tankSprite = null;
+            angle = as;        // player2 = -90
+        }
 
         vx = 0.0;
         vy = 0.0;
