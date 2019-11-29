@@ -3,16 +3,17 @@ package main;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 
 /**
  *
- * @author Wesley
+ * @author Wesley, Lenin
  */
 public class MenuMap extends javax.swing.JFrame {
     
     public int player1;
     public int player2;
-    public int map;
+    public int map = 0;
 
     /**
      * Creates new form Menu
@@ -27,8 +28,6 @@ public class MenuMap extends javax.swing.JFrame {
         configForm();
         this.player1 = player1;
         this.player2 = player2;
-        System.out.println(this.player1);
-        System.out.println(this.player2);
     }
     
     @SuppressWarnings("unchecked")
@@ -184,22 +183,27 @@ public class MenuMap extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void btnpMapSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpMapSelectActionPerformed
-        map = 0;
-        
         if (rdbMap1.isSelected()) {
-            map = 1;
+            this.map = 1;
             txtMap.setText("De Dust");
         } else if (rdbMap2.isSelected()) {
-            map = 2;
+            this.map = 2;
             txtMap.setText("De Train");
         } else if (rdbMap3.isSelected()) {
-            map = 3;
+            this.map = 3;
             txtMap.setText("Fy Pool Day");
         }
     }//GEN-LAST:event_btnpMapSelectActionPerformed
 
     private void btnpPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpPlayActionPerformed
-        new Game().start();
+        if (this.map != 0) {
+            new Game(this.map, this.player1, this.player2).start();
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(
+                    null, "WARNING", "Selecione um MAPA para jogar!", 
+                    JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnpPlayActionPerformed
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
