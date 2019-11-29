@@ -6,13 +6,13 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import keyinput.KeyInput;
+import keyboard.KeyInput;
 import map.Map;
 import objects.Tank;
 
 /**
  *
- * @author Wesley
+ * @author Wesley, Lenin
  */
 public class Game extends Canvas implements Runnable {
     
@@ -23,24 +23,67 @@ public class Game extends Canvas implements Runnable {
     private boolean running;
     private Thread thread;
 
-    private Tank greenTank;;
-    private Tank redTank;
-    private Tank yellowTank;
-    private Tank blueTank;
+    private Tank player1;
+    private Tank player2;
+    public int tank1_color;
+    public int tank2_color;
+    public int color_select;
+    
+//    private Tank blueTank;
+//    private Tank greenTank;
 
     private Map map;
+    public int map_select;
     
-    public Game() {
+    public Game(int mp, int ts1, int ts2) {
+        this.map_select = mp;
+        this.tank1_color = ts1;
+        this.tank2_color = ts2;
+
         running = false;
         setSize(new Dimension(WIDTH, HEIGHT));
         new Window(TITLE, this);
         addKeyListener(new KeyInput(this));
 
+        // MAP
         int tankY = (HEIGHT / 2) - (Tank.DIMENSION / 2) + 30;
-
-        map = new Map(this);
-        blueTank = new Tank(60, tankY, Color.BLUE, map, this);
-        greenTank = new Tank(WIDTH - 60 - Tank.DIMENSION, tankY, Color.GREEN, map,this);
+        if(this.map_select == 1) {
+            map = new Map(this);
+        } else if(this.map_select == 2) {
+            map = new Map(this, 2);
+        } else if(this.map_select == 3) {
+            map = new Map(this, 2, 3);
+        }
+        
+        // PLAYER 1
+        if(this.tank1_color == 1) {
+            // tank green
+            player1 = new Tank(60, tankY, Color.GREEN, map, 90, 1, 0, this);
+        } else if(this.tank1_color == 2) {
+            // tank red
+            player1 = new Tank(60, tankY, Color.RED, map, 90, 1, 0, this);
+        } else if(this.tank1_color == 3) {
+            // tank yellow
+            player1 = new Tank(60, tankY, Color.YELLOW, map, 90, 1, 0, this);
+        } else if(this.tank1_color == 4) {
+            // tank blue
+            player1 = new Tank(60, tankY, Color.BLUE, map, 90, 1, 0, this);
+        }
+        
+        // PLAYER 2
+        if(this.tank2_color == 1) {
+            // tank green
+            player2 = new Tank(WIDTH - 60 - Tank.DIMENSION, tankY, Color.GREEN, map, -90, 0, 2, this);
+        } else if(this.tank2_color == 2) {
+            // tank red
+            player2 = new Tank(WIDTH - 60 - Tank.DIMENSION, tankY, Color.RED, map, -90, 0, 2, this);
+        } else if(this.tank2_color == 3) {
+            // tank yellow
+            player2 = new Tank(WIDTH - 60 - Tank.DIMENSION, tankY, Color.YELLOW, map, -90, 0, 2, this);
+        } else if(this.tank2_color == 4) {
+            // tank blue
+            player2 = new Tank(WIDTH - 60 - Tank.DIMENSION, tankY, Color.BLUE, map, -90, 0, 2, this);
+        }
     }
     
     @Override
@@ -65,7 +108,7 @@ public class Game extends Canvas implements Runnable {
                 frames++;
             }
             if(System.currentTimeMillis() - timer >= 1000) {
-                System.out.println("[FPS] " + frames);
+//                System.out.println("[FPS] " + frames);
                 frames = 0;
                 timer += 1000;
             }
@@ -74,26 +117,33 @@ public class Game extends Canvas implements Runnable {
     }
 
     public void update() {
-        if(!greenTank.checkMapCollision(map)) {
+        if(!player2.checkMapCollision(map)) {
             // if no collisions happened
-            greenTank.update();
+            player2.update();
         }
-        if(!blueTank.checkMapCollision(map)) {
-            blueTank.update();
+        if(!player1.checkMapCollision(map)) {
+            // if no collisions happened
+            player1.update();
         }
-        if(greenTank.checkCannonBallCollision(blueTank)) {
-            greenTank.destroyCannonBall();
-            blueTank.destroy();
-            greenTank.addScore();
+        if(player2.checkCannonBallCollision(player1)) {
+            player2.destroyCannonBall();
+            player1.destroy();
+            player2.addScore();
             int tankY = (HEIGHT / 2) - (Tank.DIMENSION / 2) + 30;
-            blueTank.respawn(60, tankY, 90);
+            player1.respawn(60, tankY, 90);
+//            if (player1.score == 1) running = false;
+//            MenuEnd end = new MenuEnd();
+//            end.setVisible(true);
         }
-        if(blueTank.checkCannonBallCollision(greenTank)) {
-            blueTank.destroyCannonBall();
-            greenTank.destroy();
-            blueTank.addScore();
+        if(player1.checkCannonBallCollision(player2)) {
+            player1.destroyCannonBall();
+            player2.destroy();
+            player1.addScore();
             int tankY = (HEIGHT / 2) - (Tank.DIMENSION / 2) + 30;
-            greenTank.respawn(WIDTH - 60 - Tank.DIMENSION, tankY, -90);
+            player2.respawn(WIDTH - 60 - Tank.DIMENSION, tankY, -90);
+//            if (player2.score == 1) running = false;
+//            MenuEnd end = new MenuEnd();
+//            end.setVisible(true);
         }
     }
 
@@ -108,15 +158,15 @@ public class Game extends Canvas implements Runnable {
         g.setColor(Color.LIGHT_GRAY);
         g.fillRect(0, 0, WIDTH, HEIGHT);
 
-        greenTank.render(g);
-        blueTank.render(g);
+        player2.render(g);
+        player1.render(g);
 
         // draw scores
-        g.setColor(Color.BLACK);
+        g.setColor(Color.GREEN);
         g.setFont(new Font("Veradana", Font.PLAIN, 50));
-        g.drawString(blueTank.getScoreString(), 30, 50);
-        g.setColor(Color.BLACK);
-        g.drawString(greenTank.getScoreString(), WIDTH - 60, 50);
+        g.drawString(player1.getScoreString(), 30, 50);
+        g.setColor(Color.RED);
+        g.drawString(player2.getScoreString(), WIDTH - 60, 50);
 
         g.setColor(Color.YELLOW);
 
@@ -135,20 +185,22 @@ public class Game extends Canvas implements Runnable {
     public synchronized  void stop() {
         running = false;
         try {
+            System.out.println("try");
             thread.join();
         } catch(InterruptedException e) {
+            System.out.println("cath");
             e.printStackTrace();
         }
     }
 
     public void keyPressed(int key) {
-        blueTank.keyPressed(key);
-        greenTank.keyPressed(key);
+        player1.keyPressed(key);
+        player2.keyPressed(key);
     }
 
     public void keyReleased(int key) {
-        blueTank.keyReleased(key);
-        greenTank.keyReleased(key);
+        player1.keyReleased(key);
+        player2.keyReleased(key);
     }
 
     public void sleep(int ms) {

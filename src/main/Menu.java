@@ -5,7 +5,7 @@ import java.awt.Toolkit;
 
 /**
  *
- * @author Wesley
+ * @author Wesley, Lenin
  */
 public class Menu extends javax.swing.JFrame {
 
@@ -91,7 +91,6 @@ public class Menu extends javax.swing.JFrame {
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         MenuTank tank = new MenuTank();
         tank.setVisible(true);
-//        new Game().start();
         this.dispose();
     }//GEN-LAST:event_btnStartActionPerformed
 
