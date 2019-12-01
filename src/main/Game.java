@@ -9,6 +9,7 @@ import java.awt.image.BufferStrategy;
 import keyboard.KeyInput;
 import map.Map;
 import objects.Tank;
+import sounds.PlaySound;
 
 /**
  *
@@ -126,6 +127,7 @@ public class Game extends Canvas implements Runnable {
             player1.update();
         }
         if(player2.checkCannonBallCollision(player1)) {
+            new PlaySound().play("Explosion.wav");
             player2.destroyCannonBall();
             player1.destroy();
             player2.addScore();
@@ -136,6 +138,7 @@ public class Game extends Canvas implements Runnable {
 //            end.setVisible(true);
         }
         if(player1.checkCannonBallCollision(player2)) {
+            new PlaySound().play("Explosion.wav");
             player1.destroyCannonBall();
             player2.destroy();
             player1.addScore();

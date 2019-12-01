@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import main.Game;
 import map.Map;
+import sounds.PlaySound;
 
 /**
  *
@@ -57,6 +58,7 @@ public class CannonBall {
                     // x collision
                     vx = -vx;
                 }
+                new PlaySound().play("ballCollision.wav");
                 nCollisions++;
             }
         }

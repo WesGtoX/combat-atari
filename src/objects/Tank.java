@@ -13,6 +13,7 @@ import static java.lang.Math.*;
 
 import main.Game;
 import map.Map;
+import sounds.PlaySound;
 import utils.ResourceLoader;
 
 /**
@@ -172,6 +173,7 @@ public class Tank {
             rotatingCw = false;
             rotVel = -1;
         } else if(key == fireKey) {
+            new PlaySound().play("Shot.wav");
             // make CannonBall in the center of the tank
             double r = toRadians(angle);
             double bx = (x + (DIMENSION / 2.0) - CannonBall.RADIUS) + cos(r);
@@ -281,7 +283,11 @@ public class Tank {
             vy = sin;
         }
     }
-
+    /*
+    public void deathAnimation(){
+        tankSprite = ResourceLoader.loadImage("images\\explosion.png");
+    }
+    */
     public String getScoreString() {
         return "" + score;
     }
