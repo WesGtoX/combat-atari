@@ -264,11 +264,11 @@ public class MenuTank extends javax.swing.JFrame {
             this.dispose();
         } else if(player1 == 0) {
             JOptionPane.showMessageDialog(
-                    null, "WARNING", "Selecione um TANK para o Player 1!", 
+                    null, "Selecione um TANK para o Player 1!", "WARNING",
                     JOptionPane.WARNING_MESSAGE);
         } else if(player2 == 0) {
             JOptionPane.showMessageDialog(
-                    null, "WARNING", "Selecione um TANK para o Player 2!", 
+                    null, "Selecione um TANK para o Player 2!", "WARNING",
                     JOptionPane.WARNING_MESSAGE);            
         }
     }//GEN-LAST:event_btnpPlayActionPerformed

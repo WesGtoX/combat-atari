@@ -201,7 +201,7 @@ public class MenuMap extends javax.swing.JFrame {
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(
-                    null, "WARNING", "Selecione um MAPA para jogar!", 
+                    null, "Selecione um MAPA para jogar!", "WARNING", 
                     JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnpPlayActionPerformed
