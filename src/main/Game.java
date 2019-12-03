@@ -6,10 +6,13 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.util.Timer;
+import java.util.TimerTask;
 import keyboard.KeyInput;
 import map.Map;
 import objects.Tank;
 import sounds.PlaySound;
+import utils.ResourceLoader;
 
 /**
  *
@@ -95,7 +98,6 @@ public class Game extends Canvas implements Runnable {
         double amountOfTicks = 60.0;
         double ns = 1000000000 / amountOfTicks;
         int frames = 0;
-
         while(running) {
             long now = System.nanoTime();
             delta += (now - lastTime) / ns;
@@ -127,23 +129,38 @@ public class Game extends Canvas implements Runnable {
             player1.update();
         }
         if(player2.checkCannonBallCollision(player1)) {
+            long delay = 800;
+            Timer timer = new Timer();
             new PlaySound().play("Explosion.wav");
             player2.destroyCannonBall();
-            player1.destroy();
-            player2.addScore();
-            int tankY = (HEIGHT / 2) - (Tank.DIMENSION / 2) + 30;
-            player1.respawn(60, tankY, 90);
+            player1.deathAnimation();       
+            timer.schedule(new TimerTask(){
+                public void run(){
+                    player1.destroy();
+                    player2.addScore(); 
+                    int tankY = (HEIGHT / 2) - (Tank.DIMENSION / 2) + 30;
+                    player1.respawn(60, tankY, 90);
+                }
+            }, delay);
+            
 //            if (player1.score == 1) running = false;
 //            MenuEnd end = new MenuEnd();
 //            end.setVisible(true);
         }
         if(player1.checkCannonBallCollision(player2)) {
+            long delay = 800;
+            Timer timer = new Timer();
             new PlaySound().play("Explosion.wav");
             player1.destroyCannonBall();
-            player2.destroy();
-            player1.addScore();
-            int tankY = (HEIGHT / 2) - (Tank.DIMENSION / 2) + 30;
-            player2.respawn(WIDTH - 60 - Tank.DIMENSION, tankY, -90);
+            player2.deathAnimation();
+            timer.schedule(new TimerTask(){
+                public void run(){
+                    player2.destroy();
+                    player1.addScore();
+                    int tankY = (HEIGHT / 2) - (Tank.DIMENSION / 2) + 30;
+                    player2.respawn(WIDTH - 60 - Tank.DIMENSION, tankY, -90);
+                }
+            }, delay);
 //            if (player2.score == 1) running = false;
 //            MenuEnd end = new MenuEnd();
 //            end.setVisible(true);
@@ -165,10 +182,10 @@ public class Game extends Canvas implements Runnable {
         player1.render(g);
 
         // draw scores
-        g.setColor(Color.GREEN);
+        g.setColor(Color.BLACK);
         g.setFont(new Font("Veradana", Font.PLAIN, 50));
         g.drawString(player1.getScoreString(), 30, 50);
-        g.setColor(Color.RED);
+        g.setColor(Color.BLACK);
         g.drawString(player2.getScoreString(), WIDTH - 60, 50);
 
         g.setColor(Color.YELLOW);

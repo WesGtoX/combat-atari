@@ -10,6 +10,8 @@ import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import static java.lang.Math.*;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import main.Game;
 import map.Map;
@@ -37,7 +39,9 @@ public class Tank {
     private int cwKey;
     private int ccKey;
     private int fireKey;
+    private int dashKey;
     public int score;
+    private int counter;
 
     // moves and rotation variable
     private boolean movingUp;
@@ -45,6 +49,7 @@ public class Tank {
     private boolean rotatingCw;
     private boolean rotatingCc;
     private boolean destroyed;
+    private boolean dash;
     
     // tank
     public int player1;
@@ -268,8 +273,8 @@ public class Tank {
             double r = toRadians(angle);
             r = -r;
             r += PI / 2;    // 90 degrees in radians
-            double cos = cos(r);
-            double sin = sin(r);
+            double cos = 2 * cos(r);
+            double sin = 2 * sin(r);
             vx = cos;
             vy = -sin;
         }
@@ -277,17 +282,34 @@ public class Tank {
             double r = toRadians(angle);
             r = -r;
             r += PI / 2;    // 90 degrees in radians
-            double cos = cos(r);
-            double sin = sin(r);
+            double cos = 2 * cos(r);
+            double sin = 2 * sin(r);
             vx = -cos;
             vy = sin;
         }
     }
-    /*
+    
     public void deathAnimation(){
+        long delay = 800;
+        long interval = 1000;
+        Timer timer = new Timer();
         tankSprite = ResourceLoader.loadImage("images\\explosion.png");
+        timer.schedule(new TimerTask(){
+            public void run(){
+                if(tankColor == Color.GREEN) {
+                    tankSprite = ResourceLoader.loadImage("images\\hulls_tank01.png");
+                } else if(tankColor == Color.RED) {
+                    tankSprite = ResourceLoader.loadImage("images\\hulls_tank02.png");
+                } else if(tankColor == Color.YELLOW) {
+                    tankSprite = ResourceLoader.loadImage("images\\hulls_tank03.png");
+                } else if(tankColor == Color.BLUE) {
+                    tankSprite = ResourceLoader.loadImage("images\\hulls_tank04.png");
+                }
+            }
+        }, delay);
     }
-    */
+    
+    
     public String getScoreString() {
         return "" + score;
     }
